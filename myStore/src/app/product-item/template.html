@@ -1,0 +1,45 @@
+<h3>
+    <a [title]="'Подробнее о' + product.name">
+        {{ product.name }}
+    </a>
+</h3>
+
+<div *ngIf="product.images?.length != 0">
+    <button (click)="previousImage(product)">←</button>
+
+    <img *ngIf="product.images[i]" src="{{ product.images[i] }}"
+         style="width: 600px; height: 600px; border-style: solid">
+
+    <button (click)="nextImage(product)">→</button>
+</div>
+
+<p>
+    Описание: {{ product.description }}
+</p>
+
+<p *ngIf="product.rating">
+    Оценка: <span style="font-weight: bold">{{ product.rating }} / 10</span>
+</p>
+
+<p>
+    <a href="{{ product.real_link }}" style="font-weight: bold">Купить</a>
+</p>
+
+<p>Понравилось: {{ product.likes || 0 }}</p>
+
+<div>
+    <button (click)="like(product)" type="button">
+        Нравится
+    </button>
+    <button (click)="share(product.real_link)" type="button">
+        Поделиться
+    </button>
+    <button (click)="remove(product)" type="button">
+        Удалить продукт
+    </button>
+</div>
+
+<app-product-alerts
+        (notify)="onNotify()"
+        [product]="product">
+</app-product-alerts>

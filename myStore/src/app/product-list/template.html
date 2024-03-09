@@ -1,0 +1,24 @@
+<h2>Выбор категории</h2>
+
+<div id="select-category">
+    <button *ngFor="let category of categories" (click)="selectCategory(category)">
+        {{ category.name }}
+    </button>
+</div>
+
+<h2>Продукты</h2>
+
+<div *ngIf="selectedCategory.product_items.length === 0" class="products">
+    <p>Категория пуста.</p>
+</div>
+
+<div *ngIf="selectedCategory.product_items.length !== 0" class="products">
+
+    <div *ngFor="let product of selectedCategory.product_items">
+        <app-product-item
+                [product]="product"
+                (remover)="removeByName($event)"
+        >
+        </app-product-item>
+    </div>
+</div>
